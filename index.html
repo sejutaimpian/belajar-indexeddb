@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id" x-data="{isDark: $persist(false)}" x-bind:class="{'dark': isDark}" @keyup.ctrl.space="isDark = !isDark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IndexedDB</title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+    <!-- plugin alpineJS, myScript, core alpineJS -->
+    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
+    <script defer src="script.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+</head>
+
+<body>
+    <div x-data="indexedDBComponent">
+        <h1>IndexedDB with Alpine.js</h1>
+        <form @submit.prevent="addUser">
+            <label>
+                Id update:
+                <input type="number" x-model.number="idUpdate">
+            </label>
+            <br>
+            <label>
+                Username:
+                <input type="text" x-model="username" required>
+            </label>
+            <br>
+            <label>
+                Email:
+                <input type="email" x-model="email" required>
+            </label>
+            <br>
+            <button type="submit">Tambah User</button>
+            <button type="button" @click="updateUser">Update User</button>
+        </form>
+        <button @click="addData">Add Random Data</button>
+        <button @click="fetchData">Fetch Data</button>
+        <button @click="getSatu">get id 1</button>
+        <button @click="dev">dev</button>
+        <ul>
+            <template x-for="item in people" :key="item.id">
+                <li x-text="item.username" @click="deleteUser(item.id)"></li>
+            </template>
+        </ul>
+    </div>
+</body>
+
+</html>
